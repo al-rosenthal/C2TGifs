@@ -19,6 +19,10 @@ struct GiphyAPI {
     static let BASE = "https://api.giphy.com/v1/gifs"
     static let API_KEY = "efATltn9WgdlGJeysUEcTyGTrQBZRfZp"
     
+    static func favorite() {
+        // store this locally, not sure how, DB seems overkill, need
+    }
+    
     static func search(search: String, offset: Int = 0) {
         let search = "\(BASE)/search?api_key=\(API_KEY)&q=\(search)&limit=50&offset=\(offset)&rating=g&lang=en"
         if let url = URL(string: search) {
@@ -40,7 +44,7 @@ struct GiphyAPI {
             print("MADE URL")
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                    guard let data = data else { return }
+//                    guard let data = data else { return }
 //                print(String(data: data!, encoding: .utf8)!)
                 // check for a successful request
                 // map data

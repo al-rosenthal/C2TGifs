@@ -10,6 +10,11 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var segmentController: UISegmentedControl!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
     override func viewDidLoad() {
         print("VIEW DID LOAD")
 //        GiphyAPI.trending()
