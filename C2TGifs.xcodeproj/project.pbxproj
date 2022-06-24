@@ -13,6 +13,8 @@
 		12505B682864D2A100DAD480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B662864D2A100DAD480 /* Main.storyboard */; };
 		12505B6A2864D2A400DAD480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12505B692864D2A400DAD480 /* Assets.xcassets */; };
 		12505B6D2864D2A400DAD480 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B6B2864D2A400DAD480 /* LaunchScreen.storyboard */; };
+		128F0A1C28662BF80029FE8E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1B28662BF80029FE8E /* SearchViewController.swift */; };
+		128F0A1E2866301C0029FE8E /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1D2866301C0029FE8E /* GiphyAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		12505B692864D2A400DAD480 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12505B6C2864D2A400DAD480 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12505B6E2864D2A400DAD480 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		128F0A1B28662BF80029FE8E /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		128F0A1D2866301C0029FE8E /* GiphyAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				12505B692864D2A400DAD480 /* Assets.xcassets */,
 				12505B6B2864D2A400DAD480 /* LaunchScreen.storyboard */,
 				12505B6E2864D2A400DAD480 /* Info.plist */,
+				128F0A1B28662BF80029FE8E /* SearchViewController.swift */,
+				128F0A1D2866301C0029FE8E /* GiphyAPI.swift */,
 			);
 			path = C2TGifs;
 			sourceTree = "<group>";
@@ -140,7 +146,9 @@
 			files = (
 				12505B652864D2A100DAD480 /* ViewController.swift in Sources */,
 				12505B612864D2A100DAD480 /* AppDelegate.swift in Sources */,
+				128F0A1C28662BF80029FE8E /* SearchViewController.swift in Sources */,
 				12505B632864D2A100DAD480 /* SceneDelegate.swift in Sources */,
+				128F0A1E2866301C0029FE8E /* GiphyAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
