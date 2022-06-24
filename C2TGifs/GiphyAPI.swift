@@ -23,35 +23,64 @@ struct GiphyAPI {
         // store this locally, not sure how, DB seems overkill, need
     }
     
-    static func search(search: String, offset: Int = 0) {
+    static func search(search: String, offset: Int = 0, completion: @escaping ([GifData]) -> Void) {
         let search = "\(BASE)/search?api_key=\(API_KEY)&q=\(search)&limit=50&offset=\(offset)&rating=g&lang=en"
         if let url = URL(string: search) {
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                // check for a successful request
-                // map data
-                // send it back
+                do {
+                    // check if data is available
+                    // check if response is in a valid range
+                    // check if there are no errors
+                    guard let data = data, let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode, error == nil else {
+                        throw "Request Failed"
+                    }
+                    let decodedData = try JSONDecoder().decode(Response.self, from: data)
+                    completion(decodedData.data)
+                } catch {
+                    completion([])
+                }
             }
             task.resume()
         }
     }
     
     
-    static func trending(offset: Int = 0) {
+    static func trending(offset: Int = 0, completion: @escaping ([GifData]) -> Void) {
         let trending = "\(BASE)/trending?api_key=\(API_KEY)&limit=25&offset=\(offset)&rating=g"
-        print("GET Trending: \(trending)")
         if let url = URL(string: trending) {
-            print("MADE URL")
             let request = URLRequest(url: url)
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
-//                    guard let data = data else { return }
-//                print(String(data: data!, encoding: .utf8)!)
-                // check for a successful request
-                // map data
-                // send it back
+                do {
+                    // check if data is available
+                    // check if response is in a valid range
+                    // check if there are no errors
+                    guard let data = data, let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode, error == nil else {
+                        throw "Request Failed"
+                    }
+                    let decodedData = try JSONDecoder().decode(Response.self, from: data)
+                    completion(decodedData.data)
+                } catch {
+                    print(error.localizedDescription)
+                    completion([])
+                }
             }
             task.resume()
         }
     }
 }
 
+extension String: LocalizedError {
+    public var errorDescription: String? { return self }
+}
+
+struct Response: Decodable {
+    var data: [GifData]
+}
+
+struct GifData: Decodable {
+    var id: String
+    var url: String
+    var title: String
+    var images: [String: [String: String]]
+}

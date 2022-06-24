@@ -13,6 +13,8 @@
 		12505B682864D2A100DAD480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B662864D2A100DAD480 /* Main.storyboard */; };
 		12505B6A2864D2A400DAD480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12505B692864D2A400DAD480 /* Assets.xcassets */; };
 		12505B6D2864D2A400DAD480 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B6B2864D2A400DAD480 /* LaunchScreen.storyboard */; };
+		1252DA6228667A22003D4C51 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1252DA6128667A22003D4C51 /* SDWebImage */; };
+		1252DA6528667A35003D4C51 /* SDWebImageFLPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1252DA6428667A35003D4C51 /* SDWebImageFLPlugin */; };
 		128F0A1C28662BF80029FE8E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1B28662BF80029FE8E /* SearchViewController.swift */; };
 		128F0A1E2866301C0029FE8E /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1D2866301C0029FE8E /* GiphyAPI.swift */; };
 		128F0A2028665BF90029FE8E /* GifViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1F28665BF90029FE8E /* GifViewCell.swift */; };
@@ -37,6 +39,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1252DA6228667A22003D4C51 /* SDWebImage in Frameworks */,
+				1252DA6528667A35003D4C51 /* SDWebImageFLPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,6 +96,10 @@
 			dependencies = (
 			);
 			name = C2TGifs;
+			packageProductDependencies = (
+				1252DA6128667A22003D4C51 /* SDWebImage */,
+				1252DA6428667A35003D4C51 /* SDWebImageFLPlugin */,
+			);
 			productName = C2TGifs;
 			productReference = 12505B5D2864D2A100DAD480 /* C2TGifs.app */;
 			productType = "com.apple.product-type.application";
@@ -120,6 +128,10 @@
 				Base,
 			);
 			mainGroup = 12505B542864D2A100DAD480;
+			packageReferences = (
+				1252DA6028667A22003D4C51 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				1252DA6328667A35003D4C51 /* XCRemoteSwiftPackageReference "SDWebImageFLPlugin" */,
+			);
 			productRefGroup = 12505B5E2864D2A100DAD480 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -304,6 +316,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -331,6 +344,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -368,6 +382,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1252DA6028667A22003D4C51 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		1252DA6328667A35003D4C51 /* XCRemoteSwiftPackageReference "SDWebImageFLPlugin" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageFLPlugin.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1252DA6128667A22003D4C51 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1252DA6028667A22003D4C51 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		1252DA6428667A35003D4C51 /* SDWebImageFLPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1252DA6328667A35003D4C51 /* XCRemoteSwiftPackageReference "SDWebImageFLPlugin" */;
+			productName = SDWebImageFLPlugin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 12505B552864D2A100DAD480 /* Project object */;
 }
