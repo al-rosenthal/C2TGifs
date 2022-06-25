@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 import SDWebImage
 
+/*
+ 1. Favorite button
+ 2. Search function
+ 3. Download image for offline use
+ */
+
 class SearchViewController: UIViewController {
     let REUSE_IDEFNTIFIER = "gif_cell"
     
@@ -19,19 +25,38 @@ class SearchViewController: UIViewController {
     var data: [GifData] = []
     
     override func viewDidLoad() {
-        print("VIEW DID LOAD")
-        
         collectionView.delegate = self
         collectionView.dataSource = self
+        searchBar.delegate = self
         
         GiphyAPI.trending() { items in
-            print("TRENDING RESPONDED")
-            self.data = items
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            self.updateGifs(items: items)
         }
 //        GiphyAPI.search(search: "Skittles")
+    }
+    
+    func updateGifs(items: [GifData]) {
+        self.data = items
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+    }
+}
+
+extension SearchViewController: UISearchBarDelegate {
+    // called when any text changes
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        print("SEARCH BAR: \(searchText)")
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let search = searchBar.text {
+            if (!search.isEmpty) {
+                GiphyAPI.search(search: search) { items in
+                    self.updateGifs(items: items)
+                }
+            }
+        }
     }
 }
 
@@ -45,14 +70,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDEFNTIFIER, for: indexPath) as! GifViewCell
         
         if let og = imageData.images["original"]?["url"] {
-            print("DEQUE CELL: \(og)")
             cell.imgGif.sd_setImage(with: URL(string: og))
         }
-//        if let d = self.data[indexPath.row] {
-//            if let img = d.images["original"]?["url"] {
-//
-//            }
-//        }
         
         return cell
     }

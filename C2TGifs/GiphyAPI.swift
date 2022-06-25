@@ -27,7 +27,7 @@ struct GiphyAPI {
         let search = "\(BASE)/search?api_key=\(API_KEY)&q=\(search)&limit=50&offset=\(offset)&rating=g&lang=en"
         if let url = URL(string: search) {
             let request = URLRequest(url: url)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 do {
                     // check if data is available
                     // check if response is in a valid range
@@ -40,8 +40,7 @@ struct GiphyAPI {
                 } catch {
                     completion([])
                 }
-            }
-            task.resume()
+            }.resume()
         }
     }
     
@@ -50,7 +49,7 @@ struct GiphyAPI {
         let trending = "\(BASE)/trending?api_key=\(API_KEY)&limit=25&offset=\(offset)&rating=g"
         if let url = URL(string: trending) {
             let request = URLRequest(url: url)
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            URLSession.shared.dataTask(with: request) { data, response, error in
                 do {
                     // check if data is available
                     // check if response is in a valid range
@@ -64,8 +63,7 @@ struct GiphyAPI {
                     print(error.localizedDescription)
                     completion([])
                 }
-            }
-            task.resume()
+            }.resume()
         }
     }
 }
