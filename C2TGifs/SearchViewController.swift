@@ -26,13 +26,10 @@ class SearchViewController: UIViewController {
     var favorites: [GifData] = []
     
     override func viewDidLoad() {
+        
+        collectionView.register(UINib(nibName: "GifViewCell", bundle: nil), forCellWithReuseIdentifier: REUSE_IDEFNTIFIER)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        // self.collectionView.registerNib(UINib(nibName: "your_xib_name", bundle: nil), forCellWithReuseIdentifier: "your_reusable_identifier")
-
-        collectionView.register(UINib(nibName: "GifViewCell", bundle: nil), forCellWithReuseIdentifier: REUSE_IDEFNTIFIER)
-        
         
         searchBar.delegate = self
         
