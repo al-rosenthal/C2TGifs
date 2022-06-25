@@ -10,5 +10,8 @@ import UIKit
 
 class GifViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var btnFavorite: UIImageView!
     @IBOutlet weak var imgGif: UIImageView!
+    
+    
 }
