@@ -11,7 +11,6 @@ import SDWebImage
 
 /*
  1. Favorite button
- 2. Search function
  3. Download image for offline use
  */
 
@@ -22,21 +21,37 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var segmentController: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var data: [GifData] = []
+    var currentData: [GifData] = []
+    var apiResults: [GifData] = []
+    var favorites: [GifData] = []
     
     override func viewDidLoad() {
         collectionView.delegate = self
         collectionView.dataSource = self
         searchBar.delegate = self
         
+        segmentController.addTarget(self, action: #selector(onSelectorChanged(_:)), for: .valueChanged)
+        
         GiphyAPI.trending() { items in
+            self.apiResults = items
             self.updateGifs(items: items)
         }
-//        GiphyAPI.search(search: "Skittles")
+    }
+    
+    @objc func onSelectorChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            updateGifs(items: apiResults)
+        case 1:
+            updateGifs(items: favorites)
+        default:
+            updateGifs(items: apiResults)
+        }
     }
     
     func updateGifs(items: [GifData]) {
-        self.data = items
+//        self.apiResults = items
+        currentData = items
         DispatchQueue.main.async {
             self.collectionView.reloadData()
         }
@@ -53,6 +68,7 @@ extension SearchViewController: UISearchBarDelegate {
         if let search = searchBar.text {
             if (!search.isEmpty) {
                 GiphyAPI.search(search: search) { items in
+                    self.apiResults = items
                     self.updateGifs(items: items)
                 }
             }
@@ -62,11 +78,11 @@ extension SearchViewController: UISearchBarDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        return currentData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let imageData = self.data[indexPath.row]
+        let imageData = self.currentData[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDEFNTIFIER, for: indexPath) as! GifViewCell
         
         if let og = imageData.images["original"]?["url"] {
