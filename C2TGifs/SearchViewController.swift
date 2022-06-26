@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SDWebImage
+import Photos
 
 /*
  1. Favorite button
@@ -24,14 +25,21 @@ class SearchViewController: UIViewController {
     var currentData: [GifData] = []
     var apiResults: [GifData] = []
     var favorites: [GifData] = []
-    
+    let cache = NSCache<NSString, NSString>()
     override func viewDidLoad() {
-        
+        print("View did load")
         collectionView.register(UINib(nibName: "GifViewCell", bundle: nil), forCellWithReuseIdentifier: REUSE_IDEFNTIFIER)
         collectionView.delegate = self
         collectionView.dataSource = self
         
         searchBar.delegate = self
+        
+        // request authorization to the photo library
+        if (PHPhotoLibrary.authorizationStatus() != .authorized) {
+            PHPhotoLibrary.requestAuthorization { status in
+//                print("Library Authorization: \(status)")
+            }
+        }
         
         segmentController.addTarget(self, action: #selector(onSelectorChanged(_:)), for: .valueChanged)
         GiphyAPI.trending() { items in
@@ -88,7 +96,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDEFNTIFIER, for: indexPath) as! GifViewCell
         
         if let og = imageData.images["original"]?["url"] {
-//            cell.imgGif.sd_setImage(with: URL(string: og))
+            cell.imgGif.sd_setImage(with: URL(string: og))
         }
         
         return cell

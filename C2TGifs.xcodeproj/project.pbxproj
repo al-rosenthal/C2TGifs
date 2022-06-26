@@ -14,6 +14,8 @@
 		12505B6A2864D2A400DAD480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12505B692864D2A400DAD480 /* Assets.xcassets */; };
 		12505B6D2864D2A400DAD480 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B6B2864D2A400DAD480 /* LaunchScreen.storyboard */; };
 		1252DA6A2867A12D003D4C51 /* GifViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1252DA692867A12D003D4C51 /* GifViewCell.xib */; };
+		1252DA6D2868B0FD003D4C51 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1252DA6C2868B0FD003D4C51 /* SDWebImage */; };
+		1252DA6F2868B108003D4C51 /* SDWebImageFLPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1252DA6E2868B108003D4C51 /* SDWebImageFLPlugin */; };
 		128F0A1C28662BF80029FE8E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1B28662BF80029FE8E /* SearchViewController.swift */; };
 		128F0A1E2866301C0029FE8E /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1D2866301C0029FE8E /* GiphyAPI.swift */; };
 		128F0A2028665BF90029FE8E /* GifViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1F28665BF90029FE8E /* GifViewCell.swift */; };
@@ -39,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1252DA6D2868B0FD003D4C51 /* SDWebImage in Frameworks */,
+				1252DA6F2868B108003D4C51 /* SDWebImageFLPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +54,7 @@
 			children = (
 				12505B5F2864D2A100DAD480 /* C2TGifs */,
 				12505B5E2864D2A100DAD480 /* Products */,
+				1252DA6B2868B0FD003D4C51 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -87,6 +92,13 @@
 			path = GifViewCell;
 			sourceTree = "<group>";
 		};
+		1252DA6B2868B0FD003D4C51 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,6 +116,8 @@
 			);
 			name = C2TGifs;
 			packageProductDependencies = (
+				1252DA6C2868B0FD003D4C51 /* SDWebImage */,
+				1252DA6E2868B108003D4C51 /* SDWebImageFLPlugin */,
 			);
 			productName = C2TGifs;
 			productReference = 12505B5D2864D2A100DAD480 /* C2TGifs.app */;
@@ -407,6 +421,19 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1252DA6C2868B0FD003D4C51 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1252DA6028667A22003D4C51 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		1252DA6E2868B108003D4C51 /* SDWebImageFLPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1252DA6328667A35003D4C51 /* XCRemoteSwiftPackageReference "SDWebImageFLPlugin" */;
+			productName = SDWebImageFLPlugin;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 12505B552864D2A100DAD480 /* Project object */;
 }

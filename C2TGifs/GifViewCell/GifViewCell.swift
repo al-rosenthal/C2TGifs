@@ -15,8 +15,6 @@ class GifViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // do some stuff
-        print("Awake from NIB")
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(favorite))
         btnFavorite.isUserInteractionEnabled = true
         btnFavorite.addGestureRecognizer(singleTap)
@@ -24,5 +22,6 @@ class GifViewCell: UICollectionViewCell {
     
     @objc func favorite() {
          print("Favorite Selected")
+        
     }
 }

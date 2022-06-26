@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Photos
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
