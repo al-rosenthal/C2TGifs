@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import Photos
+import ImageIO
 
 /*
  1. Need to check if gif exists
@@ -54,27 +55,25 @@ class GifViewCell: UICollectionViewCell {
             let readPath = dirPath.appendingPathComponent("\(gifData!.id).gif")
             print(readPath.path)
             
-            // would like to get a cleaner implementation of this
-            if let myData = imgGif.image?.cgImage?.dataProvider?.data as? Data {
-                do {
-                    try myData.write(to: readPath)
-                } catch {
-                    print("NO GOOD: \(error.localizedDescription)")
+            // put this into a cache instead of requesting this again
+            DispatchQueue.global().async {
+                if let rawData = try? Data(contentsOf: URL(string: self.gifData!.images.original.url)!) {
+                    try? rawData.write(to: readPath)
                 }
             }
         }
     }
     
     func getFavorite() -> UIImage? {
-        print("GIF: GET FAVORITE")
         var image: UIImage? = nil
         let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         if let dirPath = paths.first {
             let readPath = dirPath.appendingPathComponent("\(gifData!.id).gif")
-            print("GIF: \(readPath.path)")
-            image = UIImage(contentsOfFile: readPath.path)
-            print("GIF: Image: \(image)")
+            if let raw = try? Data(contentsOf: readPath) {
+                image = UIImage.sd_image(with: raw)
+            }
         }
+        
         return image
     }
 }
