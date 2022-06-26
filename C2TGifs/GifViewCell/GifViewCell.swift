@@ -51,6 +51,8 @@ class GifViewCell: UICollectionViewCell {
             toggleFavoriteUI(false)
             imgGif.sd_setImage(with: URL(string: data.images.original.url))
         }
+        
+        imgGif.frame = CGRect(x: 0.0, y: 0.0, width: 150.0, height: 150.0)
     }
     
     @objc func favorite() {

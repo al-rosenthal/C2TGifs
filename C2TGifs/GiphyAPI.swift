@@ -62,7 +62,7 @@ struct GiphyAPI {
     
     
     static func trending(offset: Int = 0, completion: @escaping ([GifData]) -> Void) {
-        let trending = "\(BASE)/trending?api_key=\(API_KEY)&limit=25&offset=\(offset)&rating=g"
+        let trending = "\(BASE)/trending?api_key=\(API_KEY)&limit=5&offset=\(offset)&rating=g"
         if let url = URL(string: trending) {
             let request = URLRequest(url: url)
             URLSession.shared.dataTask(with: request) { data, response, error in
