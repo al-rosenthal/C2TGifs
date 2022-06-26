@@ -34,19 +34,11 @@ class SearchViewController: UIViewController {
         
         searchBar.delegate = self
         
-        // request authorization to the photo library
-        // might not need this stuff
-//        if (PHPhotoLibrary.authorizationStatus() != .authorized) {
-//            PHPhotoLibrary.requestAuthorization { status in
-////                print("Library Authorization: \(status)")
-//            }
-//        }
-        
         segmentController.addTarget(self, action: #selector(onSelectorChanged(_:)), for: .valueChanged)
         GiphyAPI.trending() { items in
             self.apiResults = items
             self.updateGifs(items: items)
-        }   
+        }
     }
     
     @objc func onSelectorChanged(_ sender: UISegmentedControl) {
@@ -54,7 +46,10 @@ class SearchViewController: UIViewController {
         case 0:
             updateGifs(items: apiResults)
         case 1:
-            updateGifs(items: favorites)
+            GiphyAPI.favorites() { favorites in
+                self.favorites = favorites
+                self.updateGifs(items: favorites)
+            }
         default:
             updateGifs(items: apiResults)
         }

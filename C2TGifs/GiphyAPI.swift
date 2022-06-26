@@ -19,8 +19,24 @@ struct GiphyAPI {
     static let BASE = "https://api.giphy.com/v1/gifs"
     static let API_KEY = "efATltn9WgdlGJeysUEcTyGTrQBZRfZp"
     
-    static func favorite() {
-        // store this locally, not sure how, DB seems overkill, need
+    static func favorites(completion: @escaping ([GifData]) -> Void) {
+        var liked: [GifData] = []
+        do {
+            if let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+                let items = try FileManager.default.contentsOfDirectory(atPath: path.path)
+                items.forEach { file in
+                    if (file.contains(".gif")) {
+                        if let id = file.components(separatedBy: ".").first {
+                            liked.append(GifData(id: id, url: "", title: "", images: Images(original: Original(url: path.appendingPathComponent(file).path))))
+                        }
+                    }
+                }
+                completion(liked)
+            }
+        } catch {
+            // failed to read directory – bad permissions, perhaps?
+            completion(liked)
+        }
     }
     
     static func search(search: String, offset: Int = 0, completion: @escaping ([GifData]) -> Void) {
@@ -80,5 +96,15 @@ struct GifData: Decodable {
     var id: String
     var url: String
     var title: String
-    var images: [String: [String: String]]
+    var images: Images
+}
+
+struct Images: Decodable {
+    var original: Original
+}
+
+struct Original: Decodable {
+    var height: String?
+    var width: String?
+    var url: String
 }

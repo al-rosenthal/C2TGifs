@@ -9,6 +9,16 @@ import Foundation
 import UIKit
 import Photos
 
+/*
+ 1. Need to check if gif exists
+ 2. update favorites accordingly
+ 3. remove file from directory
+ 
+ nice to have
+ 1. update for handle proper caching
+ 2. clean up how data from image is captured, looks gross
+ */
+
 class GifViewCell: UICollectionViewCell {
     
     var gifData: GifData? = nil
@@ -26,52 +36,45 @@ class GifViewCell: UICollectionViewCell {
     
     func setupCell(data: GifData) {
         gifData = data
-        if let og = data.images["original"]?["url"] {
-            imgGif.sd_setImage(with: URL(string: og))
-        }
-    }
-    
-    func loadImage(url: URL) {
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: url) {
-                
-            }
+        
+        print("GIF: \(data.images.original.url)")
+        
+        if let img = getFavorite() {
+            imgGif.image = img
+        } else {
+            imgGif.sd_setImage(with: URL(string: data.images.original.url))
         }
     }
     
     @objc func favorite() {
          print("GIF: Favorite Selected")
-        
-        
-        
-        
-        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
-        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
-//        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
-//        directory
-        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
-        if paths.count > 0 {
-            if let dirPath = paths.first {
-                let readPath = URL(fileURLWithPath: dirPath).appendingPathComponent("\(gifData!.id).gif")
-                print(readPath.path)
-                
-                if let myData = imgGif.image?.cgImage?.dataProvider?.data as? Data {
-                    print("Managed to get here!!!!")
-                    print("Got my data: \(myData.count)")
-                    do {
-                        try myData.write(to: readPath)
-                    } catch {
-                        print("NO GOOD: \(error.localizedDescription)")
-                    }
 
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        if let dirPath = paths.first {
+            let readPath = dirPath.appendingPathComponent("\(gifData!.id).gif")
+            print(readPath.path)
+            
+            // would like to get a cleaner implementation of this
+            if let myData = imgGif.image?.cgImage?.dataProvider?.data as? Data {
+                do {
+                    try myData.write(to: readPath)
+                } catch {
+                    print("NO GOOD: \(error.localizedDescription)")
                 }
-                
-                
-//                let readPath = dirPath.strings(byAppendingPaths: [""])
-//                let image = UIImage(named: readPath)
-//                let writePath = dirPath.stringByAppendingPathComponent("Image2.png")
-//                UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
             }
-          }
+        }
+    }
+    
+    func getFavorite() -> UIImage? {
+        print("GIF: GET FAVORITE")
+        var image: UIImage? = nil
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        if let dirPath = paths.first {
+            let readPath = dirPath.appendingPathComponent("\(gifData!.id).gif")
+            print("GIF: \(readPath.path)")
+            image = UIImage(contentsOfFile: readPath.path)
+            print("GIF: Image: \(image)")
+        }
+        return image
     }
 }
