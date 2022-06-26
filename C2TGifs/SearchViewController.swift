@@ -35,17 +35,39 @@ class SearchViewController: UIViewController {
         searchBar.delegate = self
         
         // request authorization to the photo library
-        if (PHPhotoLibrary.authorizationStatus() != .authorized) {
-            PHPhotoLibrary.requestAuthorization { status in
-//                print("Library Authorization: \(status)")
-            }
-        }
+        // might not need this stuff
+//        if (PHPhotoLibrary.authorizationStatus() != .authorized) {
+//            PHPhotoLibrary.requestAuthorization { status in
+////                print("Library Authorization: \(status)")
+//            }
+//        }
         
         segmentController.addTarget(self, action: #selector(onSelectorChanged(_:)), for: .valueChanged)
         GiphyAPI.trending() { items in
             self.apiResults = items
             self.updateGifs(items: items)
         }
+        
+        
+//        PHPhotosErrorDomain error -1
+        print(".accessRestricted \(PHPhotosError.Code.accessRestricted.rawValue)")
+        print(".userCancelled \(PHPhotosError.Code.userCancelled.rawValue)")
+        print(".accessUserDenied \(PHPhotosError.Code.accessUserDenied.rawValue)")
+        print(".changeNotSupported \(PHPhotosError.Code.changeNotSupported.rawValue)")
+        print(".identifierNotFound \(PHPhotosError.Code.identifierNotFound.rawValue)")
+        print(".internalError \(PHPhotosError.Code.internalError.rawValue)")
+        print(".invalidResource \(PHPhotosError.Code.invalidResource.rawValue)")
+        print(".libraryInFileProviderSyncRoot \(PHPhotosError.Code.libraryInFileProviderSyncRoot.rawValue)")
+        print(".libraryVolumeOffline \(PHPhotosError.Code.libraryVolumeOffline.rawValue)")
+        print(".missingResource \(PHPhotosError.Code.missingResource.rawValue)")
+        print(".multipleIdentifiersFound \(PHPhotosError.Code.multipleIdentifiersFound.rawValue)")
+        print(".networkAccessRequired \(PHPhotosError.Code.networkAccessRequired.rawValue)")
+        print(".notEnoughSpace \(PHPhotosError.Code.notEnoughSpace.rawValue)")
+        print(".operationInterrupted \(PHPhotosError.Code.operationInterrupted.rawValue)")
+        print(".relinquishingLibraryBundleToWriter \(PHPhotosError.Code.relinquishingLibraryBundleToWriter.rawValue)")
+        print(".requestNotSupportedForAsset \(PHPhotosError.Code.requestNotSupportedForAsset.rawValue)")
+        print(".switchingSystemPhotoLibrary \(PHPhotosError.Code.switchingSystemPhotoLibrary.rawValue)")
+        
     }
     
     @objc func onSelectorChanged(_ sender: UISegmentedControl) {
@@ -95,9 +117,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let imageData = self.currentData[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDEFNTIFIER, for: indexPath) as! GifViewCell
         
-        if let og = imageData.images["original"]?["url"] {
-            cell.imgGif.sd_setImage(with: URL(string: og))
-        }
+        cell.setupCell(data: imageData)
         
         return cell
     }
