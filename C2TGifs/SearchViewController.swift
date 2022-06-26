@@ -46,28 +46,7 @@ class SearchViewController: UIViewController {
         GiphyAPI.trending() { items in
             self.apiResults = items
             self.updateGifs(items: items)
-        }
-        
-        
-//        PHPhotosErrorDomain error -1
-        print(".accessRestricted \(PHPhotosError.Code.accessRestricted.rawValue)")
-        print(".userCancelled \(PHPhotosError.Code.userCancelled.rawValue)")
-        print(".accessUserDenied \(PHPhotosError.Code.accessUserDenied.rawValue)")
-        print(".changeNotSupported \(PHPhotosError.Code.changeNotSupported.rawValue)")
-        print(".identifierNotFound \(PHPhotosError.Code.identifierNotFound.rawValue)")
-        print(".internalError \(PHPhotosError.Code.internalError.rawValue)")
-        print(".invalidResource \(PHPhotosError.Code.invalidResource.rawValue)")
-        print(".libraryInFileProviderSyncRoot \(PHPhotosError.Code.libraryInFileProviderSyncRoot.rawValue)")
-        print(".libraryVolumeOffline \(PHPhotosError.Code.libraryVolumeOffline.rawValue)")
-        print(".missingResource \(PHPhotosError.Code.missingResource.rawValue)")
-        print(".multipleIdentifiersFound \(PHPhotosError.Code.multipleIdentifiersFound.rawValue)")
-        print(".networkAccessRequired \(PHPhotosError.Code.networkAccessRequired.rawValue)")
-        print(".notEnoughSpace \(PHPhotosError.Code.notEnoughSpace.rawValue)")
-        print(".operationInterrupted \(PHPhotosError.Code.operationInterrupted.rawValue)")
-        print(".relinquishingLibraryBundleToWriter \(PHPhotosError.Code.relinquishingLibraryBundleToWriter.rawValue)")
-        print(".requestNotSupportedForAsset \(PHPhotosError.Code.requestNotSupportedForAsset.rawValue)")
-        print(".switchingSystemPhotoLibrary \(PHPhotosError.Code.switchingSystemPhotoLibrary.rawValue)")
-        
+        }   
     }
     
     @objc func onSelectorChanged(_ sender: UISegmentedControl) {

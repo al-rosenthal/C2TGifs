@@ -12,6 +12,7 @@ import Photos
 class GifViewCell: UICollectionViewCell {
     
     var gifData: GifData? = nil
+    var rawData: Data? = nil
     
     @IBOutlet weak var btnFavorite: UIImageView!
     @IBOutlet weak var imgGif: UIImageView!
@@ -30,31 +31,47 @@ class GifViewCell: UICollectionViewCell {
         }
     }
     
+    func loadImage(url: URL) {
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: url) {
+                
+            }
+        }
+    }
+    
     @objc func favorite() {
          print("GIF: Favorite Selected")
-        // what do I need to do here
-        // I need to create an asset
-        // I need to save a gif to the animated thing
-        // probably also keep a cache or something? or maybe start all the animated from this one with a key
-        // so we can tell what is faovrite later?
-        PHPhotoLibrary.shared().performChanges {
-            let request = PHAssetCreationRequest.forAsset()
-            if let og = self.gifData?.images["original"]?["url"] {
-            
-                DispatchQueue.main.async {
-                    if let data = self.imgGif.image?.cgImage?.dataProvider?.data as? Data {
-                        request.addResource(with: .photo, data: data, options: nil)
+        
+        
+        
+        
+        let nsDocumentDirectory = FileManager.SearchPathDirectory.documentDirectory
+        let nsUserDomainMask = FileManager.SearchPathDomainMask.userDomainMask
+//        let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+//        directory
+        let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true)
+        if paths.count > 0 {
+            if let dirPath = paths.first {
+                let readPath = URL(fileURLWithPath: dirPath).appendingPathComponent("\(gifData!.id).gif")
+                print(readPath.path)
+                
+                if let myData = imgGif.image?.cgImage?.dataProvider?.data as? Data {
+                    print("Managed to get here!!!!")
+                    print("Got my data: \(myData.count)")
+                    do {
+                        try myData.write(to: readPath)
+                    } catch {
+                        print("NO GOOD: \(error.localizedDescription)")
                     }
-                }
-//                if let url = URL(string: og) {
-//                    request.addResource(with: .photo, fileURL: url, options: nil)
-//                }
-            }
-        } completionHandler: { success, error in
-            print("GIF: Was this added to the device: \(success)")
-            print("GIF: Was there an error: \(String(describing: error?.localizedDescription))")
-            
-        }
 
+                }
+                
+                
+//                let readPath = dirPath.strings(byAppendingPaths: [""])
+//                let image = UIImage(named: readPath)
+//                let writePath = dirPath.stringByAppendingPathComponent("Image2.png")
+//                UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
+            }
+          }
     }
 }
