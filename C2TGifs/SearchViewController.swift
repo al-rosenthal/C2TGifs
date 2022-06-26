@@ -34,7 +34,6 @@ class SearchViewController: UIViewController {
         searchBar.delegate = self
         
         segmentController.addTarget(self, action: #selector(onSelectorChanged(_:)), for: .valueChanged)
-        
         GiphyAPI.trending() { items in
             self.apiResults = items
             self.updateGifs(items: items)
@@ -89,7 +88,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDEFNTIFIER, for: indexPath) as! GifViewCell
         
         if let og = imageData.images["original"]?["url"] {
-            cell.imgGif.sd_setImage(with: URL(string: og))
+//            cell.imgGif.sd_setImage(with: URL(string: og))
         }
         
         return cell

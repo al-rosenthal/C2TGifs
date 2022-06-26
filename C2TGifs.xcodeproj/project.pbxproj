@@ -13,8 +13,6 @@
 		12505B682864D2A100DAD480 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B662864D2A100DAD480 /* Main.storyboard */; };
 		12505B6A2864D2A400DAD480 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12505B692864D2A400DAD480 /* Assets.xcassets */; };
 		12505B6D2864D2A400DAD480 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12505B6B2864D2A400DAD480 /* LaunchScreen.storyboard */; };
-		1252DA6228667A22003D4C51 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 1252DA6128667A22003D4C51 /* SDWebImage */; };
-		1252DA6528667A35003D4C51 /* SDWebImageFLPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 1252DA6428667A35003D4C51 /* SDWebImageFLPlugin */; };
 		1252DA6A2867A12D003D4C51 /* GifViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1252DA692867A12D003D4C51 /* GifViewCell.xib */; };
 		128F0A1C28662BF80029FE8E /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1B28662BF80029FE8E /* SearchViewController.swift */; };
 		128F0A1E2866301C0029FE8E /* GiphyAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 128F0A1D2866301C0029FE8E /* GiphyAPI.swift */; };
@@ -41,8 +39,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1252DA6228667A22003D4C51 /* SDWebImage in Frameworks */,
-				1252DA6528667A35003D4C51 /* SDWebImageFLPlugin in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,8 +104,6 @@
 			);
 			name = C2TGifs;
 			packageProductDependencies = (
-				1252DA6128667A22003D4C51 /* SDWebImage */,
-				1252DA6428667A35003D4C51 /* SDWebImageFLPlugin */,
 			);
 			productName = C2TGifs;
 			productReference = 12505B5D2864D2A100DAD480 /* C2TGifs.app */;
@@ -413,19 +407,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		1252DA6128667A22003D4C51 /* SDWebImage */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1252DA6028667A22003D4C51 /* XCRemoteSwiftPackageReference "SDWebImage" */;
-			productName = SDWebImage;
-		};
-		1252DA6428667A35003D4C51 /* SDWebImageFLPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 1252DA6328667A35003D4C51 /* XCRemoteSwiftPackageReference "SDWebImageFLPlugin" */;
-			productName = SDWebImageFLPlugin;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 12505B552864D2A100DAD480 /* Project object */;
 }
