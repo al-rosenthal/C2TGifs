@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,22 +30,29 @@
                     </imageView>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="heart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="tDM-jL-5mY">
                         <rect key="frame" x="105" y="16.5" width="30" height="27.5"/>
-                        <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" systemColor="systemPinkColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="30" id="40I-T9-xAi"/>
                             <constraint firstAttribute="width" constant="30" id="Yhh-kt-W8y"/>
                         </constraints>
                     </imageView>
+                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Syr-fD-fQG">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                    </activityIndicatorView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="jr5-u4-hN8" secondAttribute="trailing" id="53N-ZU-ZHO"/>
                     <constraint firstItem="tDM-jL-5mY" firstAttribute="top" secondItem="OMV-Uy-hvt" secondAttribute="top" constant="15" id="6HG-jQ-Gn0"/>
                     <constraint firstItem="6MK-Ck-tnD" firstAttribute="top" secondItem="OMV-Uy-hvt" secondAttribute="top" constant="15" id="8re-wd-l6p"/>
                     <constraint firstAttribute="trailing" secondItem="tDM-jL-5mY" secondAttribute="trailing" constant="15" id="9TE-xd-diD"/>
+                    <constraint firstAttribute="trailing" secondItem="Syr-fD-fQG" secondAttribute="trailing" id="OQB-rQ-wjp"/>
                     <constraint firstItem="jr5-u4-hN8" firstAttribute="leading" secondItem="OMV-Uy-hvt" secondAttribute="leading" id="QGH-dm-5Sc"/>
                     <constraint firstItem="jr5-u4-hN8" firstAttribute="top" secondItem="OMV-Uy-hvt" secondAttribute="top" id="U9R-XX-WeZ"/>
                     <constraint firstAttribute="trailing" secondItem="6MK-Ck-tnD" secondAttribute="trailing" constant="15" id="VI6-0K-nSV"/>
+                    <constraint firstItem="Syr-fD-fQG" firstAttribute="leading" secondItem="OMV-Uy-hvt" secondAttribute="leading" id="YE4-eF-9kp"/>
                     <constraint firstAttribute="bottom" secondItem="jr5-u4-hN8" secondAttribute="bottom" id="gD9-Gg-Y8d"/>
+                    <constraint firstItem="Syr-fD-fQG" firstAttribute="top" secondItem="OMV-Uy-hvt" secondAttribute="top" id="m9t-jl-C51"/>
+                    <constraint firstAttribute="bottom" secondItem="Syr-fD-fQG" secondAttribute="bottom" id="pOz-ET-z2Z"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="306" height="231"/>
@@ -52,6 +60,7 @@
                 <outlet property="btnFavorite" destination="6MK-Ck-tnD" id="PZN-RJ-hkE"/>
                 <outlet property="btnUnFavorite" destination="tDM-jL-5mY" id="qVh-yl-FGP"/>
                 <outlet property="imgGif" destination="jr5-u4-hN8" id="H8w-uE-lXb"/>
+                <outlet property="loadingWheel" destination="Syr-fD-fQG" id="8Fz-by-KVr"/>
             </connections>
             <point key="canvasLocation" x="-349.27536231884062" y="218.97321428571428"/>
         </collectionViewCell>
@@ -59,5 +68,8 @@
     <resources>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>
+        <systemColor name="systemPinkColor">
+            <color red="1" green="0.17647058823529413" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

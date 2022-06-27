@@ -17,6 +17,7 @@ class GifViewCell: UICollectionViewCell {
     @IBOutlet weak var btnFavorite: UIImageView!
     @IBOutlet weak var imgGif: UIImageView!
     @IBOutlet weak var btnUnFavorite: UIImageView!
+    @IBOutlet weak var loadingWheel: UIActivityIndicatorView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,17 +34,23 @@ class GifViewCell: UICollectionViewCell {
     
     func setupCell(data: GifData, removeGif: @escaping (String) -> Void) {
         gifData = data
+        loadingWheel.isHidden = false
+        loadingWheel.startAnimating()
+        
         self.removeGif = removeGif
         // check if item has been favorited, load accordingly
         if let img = getFavorite() {
             toggleFavoriteUI(true)
             imgGif.image = img
+            loadingWheel.isHidden = true
+            loadingWheel.stopAnimating()
         } else {
             toggleFavoriteUI(false)
-            imgGif.sd_setImage(with: URL(string: data.images.original.url))
+            imgGif.sd_setImage(with: URL(string: data.images.original.url)) { _, _, _, _ in
+                self.loadingWheel.isHidden = true
+                self.loadingWheel.stopAnimating()
+            }
         }
-        
-        imgGif.frame = CGRect(x: 0.0, y: 0.0, width: 150.0, height: 150.0)
     }
     
     @objc func favorite() {
