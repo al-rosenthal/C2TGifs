@@ -17,13 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sRr-wY-iGp">
-                                <rect key="frame" x="131.5" y="123" width="151" height="32"/>
-                                <segments>
-                                    <segment title="Gifs"/>
-                                    <segment title="Favorites"/>
-                                </segments>
-                            </segmentedControl>
+                            <searchBar contentMode="redraw" placeholder="Search for Gifs" translatesAutoresizingMaskIntoConstraints="NO" id="zz3-hK-zhW">
+                                <rect key="frame" x="5" y="64" width="404" height="51"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hOg-Yg-lfR">
                                 <rect key="frame" x="5" y="162" width="404" height="700"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -61,28 +58,53 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <searchBar contentMode="redraw" placeholder="Search for Gifs" translatesAutoresizingMaskIntoConstraints="NO" id="zz3-hK-zhW">
-                                <rect key="frame" x="5" y="64" width="404" height="51"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No favorites yet, search for gifs and select the heart!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0QO-VQ-PWn">
+                                <rect key="frame" x="20" y="427.5" width="374" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="sRr-wY-iGp">
+                                <rect key="frame" x="131.5" y="123" width="151" height="32"/>
+                                <segments>
+                                    <segment title="Gifs"/>
+                                    <segment title="Favorites"/>
+                                </segments>
+                            </segmentedControl>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No gifs found, check your internet connection and try agin!" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pjU-AD-vlz">
+                                <rect key="frame" x="20" y="427.5" width="374" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="0QO-VQ-PWn" secondAttribute="trailing" constant="20" id="4Tc-GL-qIf"/>
                             <constraint firstAttribute="trailing" secondItem="zz3-hK-zhW" secondAttribute="trailing" constant="5" id="4xT-lC-YXS"/>
+                            <constraint firstAttribute="trailing" secondItem="pjU-AD-vlz" secondAttribute="trailing" constant="20" id="6xu-Qa-b93"/>
                             <constraint firstItem="sRr-wY-iGp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Rw-Q1-IZU"/>
                             <constraint firstItem="hOg-Yg-lfR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="8nD-mz-gsk"/>
                             <constraint firstItem="hOg-Yg-lfR" firstAttribute="top" secondItem="sRr-wY-iGp" secondAttribute="bottom" constant="8" id="BvU-4Z-gaY"/>
                             <constraint firstItem="zz3-hK-zhW" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="Cn5-E1-CM6"/>
                             <constraint firstItem="hOg-Yg-lfR" firstAttribute="top" secondItem="sRr-wY-iGp" secondAttribute="bottom" constant="8" id="KbP-va-gu2"/>
+                            <constraint firstItem="pjU-AD-vlz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="LSN-q7-b45"/>
+                            <constraint firstItem="0QO-VQ-PWn" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Lab-hY-n9R"/>
+                            <constraint firstItem="pjU-AD-vlz" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="UOt-WT-yLw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hOg-Yg-lfR" secondAttribute="bottom" id="YNj-UF-dyb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="hOg-Yg-lfR" secondAttribute="trailing" constant="5" id="cPf-DK-KPn"/>
+                            <constraint firstItem="0QO-VQ-PWn" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="myj-93-R4f"/>
+                            <constraint firstItem="0QO-VQ-PWn" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="niq-Ud-DxG"/>
                             <constraint firstItem="sRr-wY-iGp" firstAttribute="top" secondItem="zz3-hK-zhW" secondAttribute="bottom" constant="8" id="q55-Qu-NPl"/>
                             <constraint firstItem="zz3-hK-zhW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="sfn-FW-nsd"/>
+                            <constraint firstItem="pjU-AD-vlz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tsv-US-zSH"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="hOg-Yg-lfR" id="lTG-xZ-13w"/>
+                        <outlet property="lblNoFavorites" destination="0QO-VQ-PWn" id="26e-qA-yzV"/>
+                        <outlet property="lblNoGifsFound" destination="pjU-AD-vlz" id="Qga-Sq-kOV"/>
                         <outlet property="searchBar" destination="zz3-hK-zhW" id="3Z4-KS-Cc5"/>
                         <outlet property="segmentController" destination="sRr-wY-iGp" id="tHb-kv-ELi"/>
                     </connections>

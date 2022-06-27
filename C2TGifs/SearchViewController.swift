@@ -21,13 +21,15 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var segmentController: UISegmentedControl!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var lblNoFavorites: UILabel!
+    @IBOutlet weak var lblNoGifsFound: UILabel!
     
     var currentData: [GifData] = []
     var apiResults: [GifData] = []
     var favorites: [GifData] = []
     let cache = NSCache<NSString, NSString>()
     override func viewDidLoad() {
-        print("View did load")
+        // use custom nib for collection view
         collectionView.register(UINib(nibName: "GifViewCell", bundle: nil), forCellWithReuseIdentifier: REUSE_IDEFNTIFIER)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -35,6 +37,8 @@ class SearchViewController: UIViewController {
         searchBar.delegate = self
         
         segmentController.addTarget(self, action: #selector(onSelectorChanged(_:)), for: .valueChanged)
+        
+        // grab trending gifs when app loads
         GiphyAPI.trending() { items in
             self.apiResults = items
             self.updateGifs(items: items)
@@ -56,9 +60,21 @@ class SearchViewController: UIViewController {
     }
     
     func updateGifs(items: [GifData]) {
-//        self.apiResults = items
         currentData = items
         DispatchQueue.main.async {
+            self.lblNoGifsFound.isHidden = true
+            self.lblNoFavorites.isHidden = true
+            if (self.currentData.count <= 0) {
+                switch self.segmentController.selectedSegmentIndex{
+                case 0:
+                    self.lblNoGifsFound.isHidden = false
+                case 1:
+                    self.lblNoFavorites.isHidden = false
+                default:
+                    self.lblNoGifsFound.isHidden = true
+                    self.lblNoFavorites.isHidden = true
+                }
+            }
             self.collectionView.reloadData()
         }
     }
@@ -70,6 +86,7 @@ extension SearchViewController: UISearchBarDelegate {
 //        print("SEARCH BAR: \(searchText)")
     }
     
+    // runs when the Search or Enter button is hit
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let search = searchBar.text {
             if (!search.isEmpty) {
