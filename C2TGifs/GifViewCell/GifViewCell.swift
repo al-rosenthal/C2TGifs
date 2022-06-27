@@ -7,23 +7,12 @@
 
 import Foundation
 import UIKit
-import Photos
 import ImageIO
-
-/*
- 1. Need to check if gif exists
- 2. update favorites accordingly
- 3. remove file from directory
- 
- nice to have
- 1. update for handle proper caching
- 2. clean up how data from image is captured, looks gross
- */
 
 class GifViewCell: UICollectionViewCell {
     
     var gifData: GifData? = nil
-    var rawData: Data? = nil
+    var removeGif: ((String) -> Void)? = nil
     
     @IBOutlet weak var btnFavorite: UIImageView!
     @IBOutlet weak var imgGif: UIImageView!
@@ -42,8 +31,10 @@ class GifViewCell: UICollectionViewCell {
         btnUnFavorite.addGestureRecognizer(unFavoriteGesture)
     }
     
-    func setupCell(data: GifData) {
+    func setupCell(data: GifData, removeGif: @escaping (String) -> Void) {
         gifData = data
+        self.removeGif = removeGif
+        // check if item has been favorited, load accordingly
         if let img = getFavorite() {
             toggleFavoriteUI(true)
             imgGif.image = img
@@ -75,8 +66,8 @@ class GifViewCell: UICollectionViewCell {
         if let dirPath = paths.first {
             let readPath = dirPath.appendingPathComponent("\(gifData!.id).gif")
             do {
-                try? FileManager.default.removeItem(atPath: readPath.path)
-                // reload list
+                try FileManager.default.removeItem(atPath: readPath.path)
+                removeGif?(gifData!.id)
             } catch {
                 // don't do anything
                 // maybe just reload table
@@ -115,5 +106,10 @@ class GifViewCell: UICollectionViewCell {
                 self.btnUnFavorite.isUserInteractionEnabled = true
             }
         }
+    }
+    
+    // remove reference to avoid memory leaks
+    deinit {
+        removeGif = nil
     }
 }

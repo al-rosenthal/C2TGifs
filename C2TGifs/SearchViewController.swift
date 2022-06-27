@@ -8,12 +8,6 @@
 import Foundation
 import UIKit
 import SDWebImage
-import Photos
-
-/*
- 1. Favorite button
- 3. Download image for offline use
- */
 
 class SearchViewController: UIViewController {
     let REUSE_IDEFNTIFIER = "gif_cell"
@@ -64,6 +58,8 @@ class SearchViewController: UIViewController {
         DispatchQueue.main.async {
             self.lblNoGifsFound.isHidden = true
             self.lblNoFavorites.isHidden = true
+            
+            // check if error labels need to be displayed
             if (self.currentData.count <= 0) {
                 switch self.segmentController.selectedSegmentIndex{
                 case 0:
@@ -109,7 +105,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let imageData = self.currentData[indexPath.row]
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REUSE_IDEFNTIFIER, for: indexPath) as! GifViewCell
         
-        cell.setupCell(data: imageData)
+        cell.setupCell(data: imageData) { id in
+            self.currentData.removeAll { data in
+                data.id == id
+            }
+            self.updateGifs(items: self.currentData)
+        }
         
         return cell
     }
